@@ -10,12 +10,15 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
-        console.log("Smart: " + smart);
-        console.log("Patient: " + patient);
+        console.log(smart);
+        console.log(patient);
         var pt = patient.read();
-        console.log("patient read: " + pt);
-        console.log("API: " + smart.patient.api);
-        console.log("FetchALL: " + smart.fetchAll({type: 'patient'});
+        console.log(pt);
+        console.log(patient.identifier);
+        console.log(patient.telecom);
+        console.log(patient.address);
+        console.log(smart.patient.api);
+        //console.log("FetchALL: " + smart.fetchAll({type: 'patient'}));
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -26,7 +29,7 @@
                       }
                     }
                   });
-        console.log("observation: " + obv);
+        console.log(obv);
 
         $.when(pt, obv).fail(onError);
 
@@ -37,6 +40,10 @@
           var day = dob.getDate();
           var monthIndex = dob.getMonth() + 1;
           var year = dob.getFullYear();
+          //Adding newly
+          var identifier = patient.identifier;
+          var address = patient.address;
+          var telecom = patient.telecom;
 
           var dobStr = monthIndex + '/' + day + '/' + year;
           var fname = '';
@@ -58,6 +65,10 @@
           p.gender = gender;
           p.fname = fname;
           p.lname = lname;
+          //Adding newly
+          p.identifier = identifier;
+          p.telecom = telecom;
+          p.address = address;
           p.age = parseInt(calculateAge(dob));
           p.height = getQuantityValueAndUnit(height[0]);
 
