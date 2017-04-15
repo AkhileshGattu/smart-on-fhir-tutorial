@@ -10,8 +10,12 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
-        console.log(patient);
+        Console.log("Smart: " + smart);
+        console.log("Patient: " + patient);
         var pt = patient.read();
+        console.log("patient read: " + pt);
+        console.log("API: " + smart.patient.api);
+        console.log("FetchALL: " + smart.fetchAll({type: 'patient'});
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -22,7 +26,7 @@
                       }
                     }
                   });
-        console.log(obv);
+        console.log("observation: " + obv);
 
         $.when(pt, obv).fail(onError);
 
@@ -97,7 +101,9 @@
 
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
+    console.log("BP Observations: " + BPObservations);
     BPObservations.forEach(function(observation){
+      console.log("Each Observation: " + observation);
       var BP = observation.component.find(function(component){
         return component.code.coding.find(function(coding) {
           return coding.code == typeOfPressure;
