@@ -10,7 +10,7 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
-        Console.log("Smart: " + smart);
+        console.log("Smart: " + smart);
         console.log("Patient: " + patient);
         var pt = patient.read();
         console.log("patient read: " + pt);
