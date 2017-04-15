@@ -14,8 +14,11 @@
         console.log("Patient: " + patient);
         var pt = patient.read();
         console.log("patient read: " + pt);
+        console.log("Patient Identifier: " + patient.identifier);
+        console.log("Patient Identifier: " + patient.telecom);
+        console.log("Patient Identifier: " + patient.address);
         console.log("API: " + smart.patient.api);
-        console.log("FetchALL: " + smart.fetchAll({type: 'patient'});
+        //console.log("FetchALL: " + smart.fetchAll({type: 'patient'}));
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
