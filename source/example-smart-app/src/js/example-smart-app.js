@@ -36,7 +36,10 @@
           type: 'Immunization',
           query: {
             code: {
-              $or: ['http://loinc.org|60494-2', 'http://loinc.org|30940-1']
+              $or: ['http://hl7.org/fhir/sid/cvx/07', 'http://hl7.org/fhir/sid/cvx/05', 
+                   'urn:oid:1.2.36.1.2001.1005.17/GNFLU', 'urn:oid:1.2.36.1.2001.1005.17/GNHEP',
+                   'urn:oid:1.2.36.1.2001.1005.17/GNMEA', 'urn:oid:1.2.36.1.2001.1005.17/GNRUB',
+                   'urn:oid:1.2.36.1.2001.1005.17/GNVAR']
             }
           }
         });
@@ -80,11 +83,20 @@
           var ldl = byCodes('2089-1');
           
           //Immunization Code
-          var measles = byCodes('05');
+          //var measles = byCodes('05');
           var mumps = byCodes('07');
+          var inluenza = byCodes('GNFLU');
+          var hepatitis = byCodes('GNHEP');
+          var measles = byCodes('GNMEA');
+          var rubella = byCodes('GNRUB');
+          var varcella = byCodes('GNVAR');
           
           console.log(measles);
           console.log(mumps);
+          console.log(inluenza);
+          console.log(hepatitis);
+          console.log(rubella);
+          console.log(varcella);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
