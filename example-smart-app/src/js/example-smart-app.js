@@ -93,6 +93,10 @@
           
           console.log(measles);
           console.log(mumps);
+          console.log(inluenza);
+          console.log(hepatitis);
+          console.log(rubella);
+          console.log(varcella);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
