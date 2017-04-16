@@ -35,7 +35,9 @@
         var imm = smart.patient.api.fetchAll({
           type: 'Immunization',
           query: {
-            notGiven: 'False'
+            code: {
+              $or: ['http://loinc.org|60494-2', 'http://loinc.org|30940-1']
+            }
           }
         });
         
@@ -45,6 +47,8 @@
 
         $.when(pt, obv, imm).done(function(patient, obv, imm) {
           var byCodes = smart.byCodes(obv, 'code');
+          //Immunization code
+          var immByCodes = smart.byCodes(imm, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
           var day = dob.getDate();
@@ -74,6 +78,10 @@
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
+          
+          //Immunization Code
+          var influenza = getInfluenza(byCodes('60494-2'), 'LL956-4');
+          var mmr = byCodes('30940-1');
 
           var p = defaultPatient();
           p.birthdate = dobStr;
@@ -142,6 +150,21 @@
     });
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
+  }
+  
+  //Influenza Immunization Method
+  function getInfluenza(ImmObservations, typeOfImmunization){
+    var formattedImmObservations = [];
+    ImmObservations.forEach(function(observation){
+      var IMO = observation.find(function(coding){
+        return coding.code == typeOfImmunization;
+      });
+      if(IMO){
+        observation.doseQuantity = IMO.doseQuantity;
+        formattedImmObservations.push(observation);
+      }
+    });
+    return getQuantityValueAndUnit(formattedImmObservations[0]);
   }
 
   function isLeapYear(year) {
