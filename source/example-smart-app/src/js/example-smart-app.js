@@ -10,14 +10,14 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
-        console.log(smart);
-        console.log(patient);
+//         console.log(smart);
+//         console.log(patient);
         var pt = patient.read();
-        console.log(pt);
-        console.log(patient.identifier);
-        console.log(patient.telecom);
-        console.log(patient.address);
-        console.log(smart.patient.api);
+//         console.log(pt);
+//         console.log(patient.identifier);
+//         console.log(patient.telecom);
+//         console.log(patient.address);
+//         console.log(smart.patient.api);
         //console.log("FetchALL: " + smart.fetchAll({type: 'patient'}));
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -29,7 +29,7 @@
                       }
                     }
                   });
-        console.log(obv);
+        //console.log(obv);
         
         //Immunization related code
         var imm = smart.patient.api.fetchAll({
@@ -41,9 +41,9 @@
         
         console.log(imm);
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, imm).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, imm).done(function(patient, obv, imm) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -51,11 +51,11 @@
           var monthIndex = dob.getMonth() + 1;
           var year = dob.getFullYear();
           //Adding newly
-          
+          console.log(imm.notGiven);
           if(typeof patient.identifier[0] != 'undefined'){
             var identifier = patient.identifier[0].value;
           }
-          console.log(patient.identifier);
+          //console.log(patient.identifier);
           //var identifier = patient.identifier;
           var address = patient.address;
           var telecom = patient.telecom;
@@ -127,9 +127,9 @@
 
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
-    console.log("BP Observations: " + BPObservations);
+    //console.log("BP Observations: " + BPObservations);
     BPObservations.forEach(function(observation){
-      console.log("Each Observation: " + observation);
+      //console.log("Each Observation: " + observation);
       var BP = observation.component.find(function(component){
         return component.code.coding.find(function(coding) {
           return coding.code == typeOfPressure;
