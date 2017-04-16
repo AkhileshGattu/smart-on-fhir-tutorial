@@ -36,7 +36,7 @@
           type: 'Immunization',
           query: {
             code: {
-              $or: ['http://loinc.org|60494-2', 'http://loinc.org|30940-1']
+              $or: ['http://hl7.org/fhir/sid/cvx/07', 'http://hl7.org/fhir/sid/cvx/05']
             }
           }
         });
@@ -80,11 +80,11 @@
           var ldl = byCodes('2089-1');
           
           //Immunization Code
-          var influenza = getInfluenza(byCodes('60494-2'), 'LL956-4');
-          var mmr = byCodes('30940-1');
+          var measles = byCodes('05');
+          var mumps = byCodes('07');
           
-          console.log(influenza);
-          console.log(mmr);
+          console.log(measles);
+          console.log(mumps);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
@@ -153,21 +153,6 @@
     });
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
-  }
-  
-  //Influenza Immunization Method
-  function getInfluenza(ImmObservations, typeOfImmunization){
-    var formattedImmObservations = [];
-    ImmObservations.forEach(function(observation){
-      var IMO = observation.find(function(coding){
-        return coding.code == typeOfImmunization;
-      });
-      if(IMO){
-        observation.doseQuantity = IMO.doseQuantity;
-        formattedImmObservations.push(observation);
-      }
-    });
-    return getQuantityValueAndUnit(formattedImmObservations[0]);
   }
 
   function isLeapYear(year) {
