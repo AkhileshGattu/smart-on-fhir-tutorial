@@ -84,12 +84,12 @@
           
           //Immunization Code
           //var measles = byCodes('05');
-          var mumps = byCodes('07');
-          var inluenza = byCodes('GNFLU');
-          var hepatitis = byCodes('GNHEP');
-          var measles = byCodes('GNMEA');
-          var rubella = byCodes('GNRUB');
-          var varcella = byCodes('GNVAR');
+          var mumps = immByCodes('07');
+          var inluenza = immByCodes('GNFLU');
+          var hepatitis = immByCodes('GNHEP');
+          var measles = immByCodes('GNMEA');
+          var rubella = immByCodes('GNRUB');
+          var varcella = immByCodes('GNVAR');
           
           console.log(measles);
           console.log(mumps);
