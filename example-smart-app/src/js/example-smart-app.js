@@ -82,6 +82,9 @@
           //Immunization Code
           var influenza = getInfluenza(byCodes('60494-2'), 'LL956-4');
           var mmr = byCodes('30940-1');
+          
+          console.log(influenza);
+          console.log(mmr);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
