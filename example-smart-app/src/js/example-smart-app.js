@@ -59,7 +59,7 @@
         
         console.log(med);
         
-        //Code related to condition
+        //Code related to medication condition
         var con = smart.patient.api.fetchAll({
           type: 'Condition',
           query: {
