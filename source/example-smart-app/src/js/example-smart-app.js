@@ -81,6 +81,13 @@
           if(typeof patient.identifier[0] != 'undefined'){
             var identifier = patient.identifier[0].value;
           }
+          
+          if(typeof imm.identifier[0] != 'undefined'){
+            var immIdentifier = imm.identifier[0].value;
+          }
+          
+          console.log(immIdentifier);
+          
           //console.log(patient.identifier);
           //var identifier = patient.identifier;
           var address = patient.address;
