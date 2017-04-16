@@ -41,7 +41,12 @@
           var monthIndex = dob.getMonth() + 1;
           var year = dob.getFullYear();
           //Adding newly
-          var identifier = patient.identifier;
+          
+          if(typeof patient.identifier[0] != 'undefined'){
+            var identifier = patient.identifier[0].value;
+          }
+          console.log(patient.identifier);
+          //var identifier = patient.identifier;
           var address = patient.address;
           var telecom = patient.telecom;
 
