@@ -60,7 +60,7 @@
         console.log(med);
         
         //Code related to condition
-        var con = var imm = smart.patient.api.fetchAll({
+        var con = smart.patient.api.fetchAll({
           type: 'Condition',
           query: {
             code: {
