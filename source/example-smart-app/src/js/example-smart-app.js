@@ -20,9 +20,26 @@
         console.log(smart.patient.api);
         //console.log("FetchALL: " + smart.fetchAll({type: 'patient'}));
         var obv = smart.patient.api.fetchAll({
-                    type: 'Observation'
+                    type: 'Observation',
+                    query: {
+                      code: {
+                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
+                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+                      }
+                    }
                   });
         console.log(obv);
+        
+        //Immunization related code
+        var imm = smart.patient.api.fetchAll({
+          type: 'Immunization',
+          query: {
+            notGiven: 'False'
+          }
+        });
+        
+        console.log(imm);
 
         $.when(pt, obv).fail(onError);
 
