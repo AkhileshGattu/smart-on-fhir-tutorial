@@ -50,6 +50,7 @@
           var day = dob.getDate();
           var monthIndex = dob.getMonth() + 1;
           var year = dob.getFullYear();
+          console.log("After Imm before notgiven");
           console.log(imm.notGiven);
           //Adding newly
           if(typeof patient.identifier[0] != 'undefined'){
