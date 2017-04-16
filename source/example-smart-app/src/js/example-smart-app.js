@@ -57,13 +57,27 @@
         });
         
         console.log(med);
+        
+        var con = var imm = smart.patient.api.fetchAll({
+          type: 'Condition',
+          query: {
+            code: {
+              $or: ['http://snomed.info/sct|0160245001', 'http://snomed.info/sct|4448006', 'http://snomed.info/sct|4225003',
+                   'http://snomed.info/sct|3950001', 'http://snomed.info/sct|2733002',
+                   'http://snomed.info/sct|2704003']
+            }
+          }
+        });
+        
+        console.log(con);
 
-        $.when(pt, obv, imm, med).fail(onError);
+        $.when(pt, obv, imm, med, con).fail(onError);
 
-        $.when(pt, obv, imm, med).done(function(patient, obv, imm, med) {
+        $.when(pt, obv, imm, med, con).done(function(patient, obv, imm, med, con) {
           var byCodes = smart.byCodes(obv, 'code');
           //Immunization code
           var immByCodes = smart.byCodes(imm, 'code');
+          var conByCodes = smart.byCodes(con, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
           var day = dob.getDate();
@@ -109,6 +123,20 @@
           console.log(hepatitis);
           console.log(rubella);
           console.log(varcella);
+          
+          var con1 = byCodes('0160245001');
+          var con2 = byCodes('4448006');
+          var con3 = byCodes('4225003');
+          var con4 = byCodes('3950001');
+          var con5 = byCodes('2733002');
+          var con6 = byCodes('2704003');
+          
+          console.log(con1);
+          console.log(con2);
+          console.log(con3);
+          console.log(con4);
+          console.log(con5);
+          console.log(con6);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
