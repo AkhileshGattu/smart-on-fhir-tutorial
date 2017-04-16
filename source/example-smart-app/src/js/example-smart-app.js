@@ -36,19 +36,31 @@
           type: 'Immunization',
           query: {
             code: {
-              $or: ['http://hl7.org/fhir/sid/cvx/07', 'http://hl7.org/fhir/sid/cvx/05', 
-                   'urn:oid:1.2.36.1.2001.1005.17/GNFLU', 'urn:oid:1.2.36.1.2001.1005.17/GNHEP',
-                   'urn:oid:1.2.36.1.2001.1005.17/GNMEA', 'urn:oid:1.2.36.1.2001.1005.17/GNRUB',
-                   'urn:oid:1.2.36.1.2001.1005.17/GNVAR']
+              $or: ['http://hl7.org/fhir/sid/cvx|07', 'urn:oid:1.2.36.1.2001.1005.17|GNFLU', 'urn:oid:1.2.36.1.2001.1005.17|GNHEP',
+                   'urn:oid:1.2.36.1.2001.1005.17|GNMEA', 'urn:oid:1.2.36.1.2001.1005.17|GNRUB',
+                   'urn:oid:1.2.36.1.2001.1005.17|GNVAR']
             }
           }
         });
         
         console.log(imm);
+        
+        var med = smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
+            results.forEach(function(prescription){
+            if (prescription.medicationCodeableConcept) {
+                displayMedication(prescription.medicationCodeableConcept.coding);
+            } else if (prescription.medicationReference) {
+                var med = refs(prescription, prescription.medicationReference);
+                displayMedication(med && med.code.coding || []);
+            }
+          });
+        });
+        
+        console.log(med);
 
-        $.when(pt, obv, imm).fail(onError);
+        $.when(pt, obv, imm, med).fail(onError);
 
-        $.when(pt, obv, imm).done(function(patient, obv, imm) {
+        $.when(pt, obv, imm, med).done(function(patient, obv, imm, med) {
           var byCodes = smart.byCodes(obv, 'code');
           //Immunization code
           var immByCodes = smart.byCodes(imm, 'code');
@@ -165,6 +177,18 @@
     });
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
+  }
+  
+  
+  function displayMedication (medCodings) {
+      return getMedicationName(medCodings);
+  }
+  
+  function getMedicationName (medCodings) {
+      var coding = medCodings.find(function(c){
+      return c.system == "http://www.nlm.nih.gov/research/umls/rxnorm";
+      });
+      return coding && coding.display || "Unnamed Medication(TM)"
   }
 
   function isLeapYear(year) {
