@@ -112,19 +112,19 @@
           
           //Immunization Code
           //var measles = byCodes('05');
-//           var mumps = immByCodes('07');
-//           var inluenza = immByCodes('GNFLU');
-//           var hepatitis = immByCodes('GNHEP');
-//           var measles = immByCodes('GNMEA');
-//           var rubella = immByCodes('GNRUB');
-//           var varcella = immByCodes('GNVAR');
+          var mumps = immByCodes('07');
+          var inluenza = immByCodes('GNFLU');
+          var hepatitis = immByCodes('GNHEP');
+          var measles = immByCodes('GNMEA');
+          var rubella = immByCodes('GNRUB');
+          var varcella = immByCodes('GNVAR');
           
-          console.log(measles);
-          console.log(mumps);
-          console.log(inluenza);
-          console.log(hepatitis);
-          console.log(rubella);
-          console.log(varcella);
+//           console.log(measles);
+//           console.log(mumps);
+//           console.log(inluenza);
+//           console.log(hepatitis);
+//           console.log(rubella);
+//           console.log(varcella);
           
           var con1 = byCodes('0160245001');
           var con2 = byCodes('4448006');
