@@ -38,19 +38,6 @@
         
         //console.log(imm);
         
-        var med = smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
-            results.forEach(function(prescription){
-            if (prescription.medicationCodeableConcept) {
-                displayMedication(prescription.medicationCodeableConcept.coding);
-            } else if (prescription.medicationReference) {
-                var med = refs(prescription, prescription.medicationReference);
-                displayMedication(med && med.code.coding || []);
-            }
-          });
-        });
-        
-        //console.log(med);
-        
         var con = smart.patient.api.fetchAll({
           type: 'Condition',
           query: {
@@ -64,9 +51,9 @@
         
         //console.log(con);
 
-        $.when(pt, obv, imm, med, con).fail(onError);
+        $.when(pt, obv, imm, con).fail(onError);
 
-        $.when(pt, obv, imm, med, con).done(function(patient, obv, imm, med, con) {
+        $.when(pt, obv, imm, con).done(function(patient, obv, imm, con) {
           var byCodes = smart.byCodes(obv, 'code');
           //Immunization code
           var immByCodes = smart.byCodes(imm, 'code');
@@ -205,18 +192,6 @@
     });
 
     return getQuantityValueAndUnit(formattedBPObservations[0]);
-  }
-  
-  
-  function displayMedication (medCodings) {
-      return getMedicationName(medCodings);
-  }
-  
-  function getMedicationName (medCodings) {
-      var coding = medCodings.find(function(c){
-      return c.system == "http://www.nlm.nih.gov/research/umls/rxnorm";
-      });
-      return coding && coding.display || "Unnamed Medication(TM)"
   }
 
   function isLeapYear(year) {
