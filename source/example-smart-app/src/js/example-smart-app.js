@@ -86,7 +86,7 @@
 //             var immIdentifier = imm.identifier[0].value;
 //           }
           
-          console.log(immIdentifier);
+          //console.log(immIdentifier);
           
           //console.log(patient.identifier);
           //var identifier = patient.identifier;
@@ -252,6 +252,15 @@
   }
 
   window.drawVisualization = function(p) {
+    
+    var con = $http.get("https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/MedicationOrder?patient=2744010&status=active");
+                        con.success(function (data) {
+                            if(data!=null)
+                            {
+                                console.log(data);                   
+                            }
+                        })
+    
     console.log(p);
     $('#holder').show();
     $('#loading').hide();
