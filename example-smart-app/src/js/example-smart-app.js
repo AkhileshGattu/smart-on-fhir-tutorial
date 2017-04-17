@@ -36,7 +36,7 @@
           type: 'Immunization'
         });
         
-        console.log(imm);
+        //console.log(imm);
                 
         var med = smart.patient.api.fetchAllWithReferences({type: "MedicationOrder"},["MedicationOrder.medicationReference"]).then(function(results, refs) {
             results.forEach(function(prescription){
@@ -49,7 +49,7 @@
           });
         });
         
-        console.log(med);
+        //console.log(med);
         
         //Code related to medication condition
         var con = smart.patient.api.fetchAll({
@@ -63,7 +63,7 @@
           }
         });
         
-        console.log(con);
+        //console.log(con);
 
         $.when(pt, obv, imm, med, con).fail(onError);
 
@@ -112,12 +112,12 @@
           
           //Immunization Code
           //var measles = byCodes('05');
-          var mumps = immByCodes('07');
-          var inluenza = immByCodes('GNFLU');
-          var hepatitis = immByCodes('GNHEP');
-          var measles = immByCodes('GNMEA');
-          var rubella = immByCodes('GNRUB');
-          var varcella = immByCodes('GNVAR');
+//           var mumps = immByCodes('07');
+//           var inluenza = immByCodes('GNFLU');
+//           var hepatitis = immByCodes('GNHEP');
+//           var measles = immByCodes('GNMEA');
+//           var rubella = immByCodes('GNRUB');
+//           var varcella = immByCodes('GNVAR');
           
           console.log(measles);
           console.log(mumps);
@@ -133,12 +133,12 @@
           var con5 = byCodes('2733002');
           var con6 = byCodes('2704003');
           
-          console.log(con1);
-          console.log(con2);
-          console.log(con3);
-          console.log(con4);
-          console.log(con5);
-          console.log(con6);
+//           console.log(con1);
+//           console.log(con2);
+//           console.log(con3);
+//           console.log(con4);
+//           console.log(con5);
+//           console.log(con6);
 
           var p = defaultPatient();
           p.birthdate = dobStr;
@@ -253,14 +253,14 @@
   }
 
   window.drawVisualization = function(p) {
+       
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/MedicationOrder?patient=2744010&status=active", false);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+    var response = JSON.parse(xhttp.responseText);
     
-    var con = $http.get("https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/MedicationOrder?patient=2744010&status=active");
-                        con.success(function (data) {
-                            if(data!=null)
-                            {
-                                console.log(data);                   
-                            }
-                        })
+    console.log(response);
     
     console.log(p);
     $('#holder').show();
