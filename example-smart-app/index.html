@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-    <title>AkhileshGattu-SMART-App</title>
+    <title>Akhilesh-SMART-App</title>
 
     <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
   </head>
@@ -16,7 +16,7 @@
       <div class="bounce3"></div>
     </div>
     <div id='holder' >
-      <h2>AkhileshGattu-SMART-App</h2>
+      <h2>Example-SMART-App</h2>
 
       <h2>Patient Resource</h2>
       <table>
@@ -74,7 +74,14 @@
       extractData().then(
         //Display Patient Demographics and Observations if extractData was success
         function(p) {
-          drawVisualization(p);
+		var con = $http.get("https://fhir-open.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/MedicationOrder?patient=2744010&status=active");
+                        con.success(function (data) {
+                            if(data!=null)
+                            {
+                                console.log(data);                   
+                            }
+                        })
+						drawVisualization(p);
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed
