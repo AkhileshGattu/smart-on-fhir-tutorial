@@ -84,9 +84,9 @@
             var identifier = patient.identifier[0].value;
           }
           
-          if(typeof imm.identifier[0] != 'undefined'){
-            var immIdentifier = imm.identifier[0].value;
-          }
+//           if(typeof imm.identifier[0] != 'undefined'){
+//             var immIdentifier = imm.identifier[0].value;
+//           }
           
           console.log(immIdentifier);
           
